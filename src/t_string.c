@@ -97,10 +97,12 @@ void setCommand(redisClient *c) {
     int unit = UNIT_SECONDS;
     int flags = REDIS_SET_NO_FLAGS;
 
+	printf("set KEY : %s \n",c->argv[1]->ptr);
+	printf("set VALUE : %s \n",c->argv[2]->ptr);
+
     for (j = 3; j < c->argc; j++) {
         char *a = c->argv[j]->ptr;
         robj *next = (j == c->argc-1) ? NULL : c->argv[j+1];
-
         if ((a[0] == 'n' || a[0] == 'N') &&
             (a[1] == 'x' || a[1] == 'X') && a[2] == '\0') {
             flags |= REDIS_SET_NX;
